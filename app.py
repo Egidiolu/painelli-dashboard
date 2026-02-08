@@ -629,7 +629,7 @@ if df is not None:
 
         # Preparar dados mensais
         mensal = df_filtrado.groupby('Periodo_Aba').agg({
-            'Pedido': 'count',
+            'Data': 'count',
             'R$ Venda': 'sum',
             coluna_lucro: 'sum'
         }).reset_index()
@@ -745,7 +745,7 @@ if df is not None:
         with col1:
             # Gráfico de Situação
             situacao_df = df_filtrado.groupby('Situação').agg({
-                'Pedido': 'count',
+                'Data': 'count',
                 'R$ Venda': 'sum'
             }).reset_index()
             situacao_df.columns = ['Situação', 'Quantidade', 'Faturamento']
@@ -780,7 +780,7 @@ if df is not None:
         with col2:
             # Gráfico de Tipo de Entrega
             entrega_df = df_filtrado.groupby('ENTREGA').agg({
-                'Pedido': 'count',
+                'Data': 'count',
                 coluna_lucro: 'sum'
             }).reset_index()
             entrega_df.columns = ['Tipo Entrega', 'Quantidade', 'Lucro']
@@ -803,7 +803,7 @@ if df is not None:
         st.markdown("#### 📅 Comparativo Anual")
 
         anual = df_filtrado.groupby('Ano').agg({
-            'Pedido': 'count',
+            'Data': 'count',
             'R$ Venda': 'sum',
             coluna_lucro: 'sum'
         }).reset_index()
@@ -871,7 +871,7 @@ if df is not None:
         with col1:
             st.markdown("#### 🥇 Top 15 Compradores (por Faturamento)")
             top_compradores = df_filtrado.groupby('Comprador').agg({
-                'Pedido': 'count',
+                'Data': 'count',
                 'R$ Venda': 'sum',
                 coluna_lucro: 'sum'
             }).reset_index()
@@ -894,7 +894,7 @@ if df is not None:
         with col2:
             st.markdown("#### 🔄 Compradores Mais Recorrentes")
             recorrentes = df_filtrado.groupby('Comprador').agg({
-                'Pedido': 'count',
+                'Data': 'count',
                 'R$ Venda': 'sum'
             }).reset_index()
             recorrentes.columns = ['Comprador', 'Qtd Compras', 'Total Gasto']
@@ -918,7 +918,7 @@ if df is not None:
 
         periodos_fat = df_filtrado.groupby('Periodo_Aba')['R$ Venda'].sum().sort_values(ascending=False)
         periodos_lucro = df_filtrado.groupby('Periodo_Aba')[coluna_lucro].sum().sort_values(ascending=False)
-        periodos_qtd = df_filtrado.groupby('Periodo_Aba')['Pedido'].count().sort_values(ascending=False)
+        periodos_qtd = df_filtrado.groupby('Periodo_Aba')['Data'].count().sort_values(ascending=False)
 
         col1, col2, col3 = st.columns(3)
 
@@ -961,7 +961,7 @@ if df is not None:
                        9: 'Set', 10: 'Out', 11: 'Nov', 12: 'Dez'}
 
         sazon = df_filtrado.groupby('Mes').agg({
-            'Pedido': 'count',
+            'Data': 'count',
             'R$ Venda': 'sum',
             coluna_lucro: 'sum'
         }).reset_index()
